@@ -9,10 +9,7 @@ if [ ! -e models/Lang_OH ]; then
     echo "IMPORTANT NOTE: The models for Dutch ASR (collectively known as 'oral history') that are installable through this Kaldi_NL distribution are licensed under the Creative Commons Attribution-NonCommercial-ShareAlike license (4.0)">&2
     echo "-----------------------------------------------------">&2
 
-    if [ ! -e oral_history_models.tar.gz ]; then
-        wget https://applejack.science.ru.nl/downloads/oral_history_models.tar.gz || fatalerror "Unable to download oral history models from applejack.science.ru.nl!"
-    fi
-    tar -C models --strip-components 1 -xvzf oral_history_models.tar.gz || fatalerror "Failure during extraction of models"
+    tar -C models --strip-components 1 -xvzf /mnt/c/linux/sttPackages/oral_history_models.tar.gz || fatalerror "Failure during extraction of models"
 
     rm oral_history_models.tar.gz
 
