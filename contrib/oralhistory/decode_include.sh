@@ -355,5 +355,9 @@ for segment in $segments; do
 	fi
 done
 
+# remove large .seg files, remove this to get the output.
+rm -r -f "$result/intermediate"
+rm -r -f "$result/liumlog"
+
 date=$(date)
 log "(Finished at $date)"
