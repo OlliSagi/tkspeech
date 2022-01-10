@@ -331,22 +331,6 @@ if [ -z "$mwip" ] && [ -z "$miac" ]; then
 		./scripts/ctm2xml.py "$result" "1Best" "$data" || die "ctm2xml failed"
 	fi
 
-	## process speaker diarisation output
-	if [ $stage -le 11 ] && [ -s "$result/liumlog/segmentation.1.log" ] && [ -x ./scripts/addspkctm.py ];
-	then
-		logtitle "Processing speaker diarisation output"
-
-		segments="$(cat "$data/ALL/segments" | cut -d " " -f 2 | sort | uniq)"
-		for segment in $segments; do
-			# Create .rttm
-			spkr_seg="$result/liumlog/$segment.seg"
-			cat "$spkr_seg" | sed -n '/;;/!p' | sort -nk3 | awk '{printf "SPEAKER %s %s %.2f %.2f <NA> <NA> %s <NA>\n", $1, $2, ($3 / 100), ($4 / 100), $8}' > "$result/$segment.rttm" || die "Failure creating RTTM file from speaker diarisation output"
-
-			# Create .ctm with speaker ids
-			./scripts/addspkctm.py "$result/$segment.rttm" "$result/1Best.ctm" || die "Failure adding speakers to CTM"
-		done
-	fi
-
 	if [ $stage -le 12 ] && [ -s "$result/liumlog/segmentation.1.log" ] && [ -x ./scripts/wordpausestatistic.perl ]; then
 		logtitle "Adding sentence boundaries"
 
@@ -370,11 +354,6 @@ for segment in $segments; do
 		log " - RTTM:                $result/$segment.rttm"
 	fi
 done
-if [ -e "$result/1Best.ctm.spk" ]; then
-	log " - Speaker diarisation: $result/1Best.ctm.spk"
-fi
-if [ -e "$result/1Best.sent" ]; then
-	log " - Sentence boundaries: $result/1Best.sent"
-fi
+
 date=$(date)
 log "(Finished at $date)"
