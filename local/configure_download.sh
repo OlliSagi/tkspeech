@@ -41,15 +41,13 @@ if [ ! -e models/Patch1 ]; then
 fi
 
 # Correct hardcoded paths in existing configuration files:
-find -name "*.conf" | xargs sed -i "s|/home/laurensw/Documents/Models|$modelpack|g"
-
 for model in "$@"; do
     if [ -d "contrib/$model" ]; then
-        if [ -e "contrib/$model/configure_download.sh" ]; then
-            source "contrib/$model/configure_download.sh"
+        if [ "$NODOWNLOAD" != "1" ] && [ -e "contrib/$model/configure_download.sh" ]; then
+            . "contrib/$model/configure_download.sh"
         fi
-        for f in contrib/$model/decode*.sh; do
-            ln -s $f $(basename $f)
+        for f in "contrib/$model/decode"*.sh; do
+            [ -e "$f" ] && [ ! -e "$(basename "$f")" ] && ln -s "$f" "$(basename "$f")"
         done
     else
         echo "Specified model ($model) not found, expected a directory $root/contrib/$model/">&2
