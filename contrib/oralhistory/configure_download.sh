@@ -10,7 +10,6 @@ if [ ! -e models/Lang_OH ]; then
     #fi
      tar -C models --strip-components 1 -xvzf /home/olli/oral_history_models.tar.gz || fatalerror "Failure during extraction of models"
 
-    rm oral_history_models.tar.gz
 
     #correct absolute paths
     find -name "*.conf" | xargs sed -i "s|/vol/customopt/kaldi/egs/Kaldi_NL/Models|$modelpack|g"
