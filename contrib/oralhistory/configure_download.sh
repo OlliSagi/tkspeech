@@ -8,8 +8,7 @@ if [ ! -e models/Lang_OH ]; then
     #if [ ! -e oral_history_models.tar.gz ]; then
     #    wget oral_history_models.tar.gz [Add url for download if file is not on storage already, see knl repository for details] || fatalerror "Unable to download oral history models"
     #fi
-     tar -C models --strip-components 1 -xvzf /home/download/oral_history_models.tar.gz || fatalerror "Failure during extraction of models"
-
+     tar -C models --strip-components 1 -xvzf $HOME/download/oral_history_models.tar.gz || fatalerror "Failure during extraction of models"
 
     #correct absolute paths
     find -name "*.conf" | xargs sed -i "s|/vol/customopt/kaldi/egs/Kaldi_NL/Models|$modelpack|g"
