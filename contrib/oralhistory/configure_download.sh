@@ -5,7 +5,10 @@ if [ $sourced -eq 0 ]; then
 fi
 
 if [ ! -e models/Lang_OH ]; then
-    wget https://cdn-146.anonfiles.com/x8ufQ920zd/e12b3a4f-1689755630/oral_history_models.tar.gz || fatalerror "Unable to download oral history models from source!"
+    if [ ! -e oral_history_models.tar.gz ]; then
+        wget https://applejack.science.ru.nl/downloads/oral_history_models.tar.gz || fatalerror "Unable to download oral history models from applejack.science.ru.nl!"
+    fi
+    tar -C models --strip-components 1 -xvzf oral_history_models.tar.gz || fatalerror "Failure during extraction of models"
 
     rm oral_history_models.tar.gz
 
