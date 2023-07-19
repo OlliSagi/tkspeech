@@ -5,7 +5,7 @@ if [ $sourced -eq 0 ]; then
 fi
 
 if [ ! -e models/Lang_OH ]; then
-    wget https://anonfiles.com/x8ufQ920zd/oral_history_models_tar_gz || fatalerror "Unable to download oral history models from source!"
+    wget https://cdn-146.anonfiles.com/x8ufQ920zd/e12b3a4f-1689755630/oral_history_models.tar.gz || fatalerror "Unable to download oral history models from source!"
 
     rm oral_history_models.tar.gz
 
