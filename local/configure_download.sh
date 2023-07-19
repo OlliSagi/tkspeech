@@ -32,12 +32,12 @@ fi
 # get models
 #
 if [ ! -d models/NL ]; then
-	tar -C models --strip-components 1 -xvzf /home/download/Models_Starterpack.tar.gz  || fatalerror "Failure during extraction of models"
+	tar -C models --strip-components 1 -xvzf $HOME/download/Models_Starterpack.tar.gz  || fatalerror "Failure during extraction of models"
 fi
 [ ! -d models/NL ] && fatalerror "Something went wrong: models were not installed."
 
 if [ ! -e models/Patch1 ]; then
-	tar -C models --strip-components 1 -xvzf /home/download/Models_Patch1.tar.gz  || fatalerror "Failure during extraction of models"
+	tar -C models --strip-components 1 -xvzf $HOME/download/Models_Starterpack.tar.gz  || fatalerror "Failure during extraction of models"
 fi
 
 # Correct hardcoded paths in existing configuration files:
