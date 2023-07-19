@@ -19,11 +19,16 @@ fi
 mkdir -p $modelpack || fatalerror "Model base directory $modelpack does not exist and unable to create"
 modelpack=$(realpath $modelpack)
 
+#link to the model pack directory from the kaldi_nl root
+if [ ! -e models ]; then
+    ln -s -f $modelpack models
+fi
+
 #we need this very ugly patch,
 #creating a symlink back to itself,
 #otherwise certain models break
-if [ ! -e models/Models ] && [ "$NODOWNLOAD" != "1" ]; then
-    ln -s "$(realpath models)" models/Models
+if [ ! -e models/Models ]; then
+    ln -s $(realpath models) models/Models
 fi
 
 # get models
